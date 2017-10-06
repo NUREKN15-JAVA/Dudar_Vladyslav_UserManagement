@@ -32,6 +32,7 @@
         <junit>
             <classpath>
                 <pathelement location="${build-dir}"/>
+                <path id="junit" location="${basedir}/lib/junit-4.9.jar"/>
             </classpath>
             <batchtest>
                 <fileset dir="${test-java-dir}">
