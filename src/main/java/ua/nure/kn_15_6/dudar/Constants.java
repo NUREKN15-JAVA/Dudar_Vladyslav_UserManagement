@@ -12,7 +12,10 @@ public class Constants {
     public static final String ERR_FAILED_TO_GET_PROPERTIES = "Failed to get properties";
 
     //SQL Queries
-    public static final String SQL_CREATE_USER = "INSERT INTO users (firstname, lastname, dateofbirth) VALUES (?, ?, ?)";
+    public static final String SQL_INSERT_USER = "INSERT INTO users (firstname, lastname, dateofbirth) VALUES (?, ?, ?)";
     public static final String SQL_IDENTITY = "call IDENTITY()";
-    public static final String SQL_FIND_ALL = "SELECT id, firstname, lastname, dateofbirth FROM users";
+    public static final String SQL_SELECT_ALL = "SELECT id, firstname, lastname, dateofbirth FROM users";
+    public static final String SQL_UPDATE = "UPDATE users SET firstname=?, lastname=?, dateofbirth=? WHERE id=?";
+    public static final String SQL_DELETE = "DELETE FROM users WHERE id=?";
+    public static final String SQL_SELECT_BY_ID = "SELECT * FROM users WHERE id=?";
 }

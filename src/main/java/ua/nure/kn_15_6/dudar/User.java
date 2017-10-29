@@ -3,6 +3,7 @@ package ua.nure.kn_15_6.dudar;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Objects;
 
 /**
  * Created by Vlad on 30.09.2017.
@@ -67,5 +68,31 @@ public class User {
         } else {
             throw new IllegalArgumentException(Constants.ERR_NO_BIRTHDATE);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == this) return true;
+        if (!(o instanceof User)) {
+            return false;
+        }
+
+        User user = (User) o;
+
+        return user.getFirstName().equals(this.firstName) &&
+                user.getLastName().equals(this.lastName) &&
+                Objects.equals(user.getId(), this.id) &&
+                user.getBirthDate().equals(this.birthDate);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31 * result + id.hashCode();
+        result = 31 * result + firstName.hashCode();
+        result = 31 * result + lastName.hashCode();
+        result = 31 * result + birthDate.hashCode();
+        return result;
     }
 }

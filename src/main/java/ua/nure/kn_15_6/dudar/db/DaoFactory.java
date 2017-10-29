@@ -42,7 +42,7 @@ public class DaoFactory {
         return new ConnectionFactoryImpl(driver, url, user, password);
     }
 
-    public UserDao getUserDao() throws Exception{
+    public UserDao getUserDao() {
         UserDao result = null;
 
         try {
