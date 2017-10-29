@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
-public class HsqlUserDao implements UserDao {
+class HsqlUserDao implements UserDao {
     private ConnectionFactory connectionFactory;
 
     public HsqlUserDao() {
