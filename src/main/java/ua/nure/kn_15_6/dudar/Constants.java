@@ -9,10 +9,10 @@ public class Constants {
     public static final String ERR_NO_BIRTHDATE = "Birth date is not specified.";
     public static final String ERR_FAILED_TO_LOAD_JDBC = "ERROR: failed to load HSQLDB JDBC driver.";
     public static final String ERR_NO_USER = "Such user doesn't exist in database";
+    public static final String ERR_FAILED_TO_GET_PROPERTIES = "Failed to get properties";
 
     //SQL Queries
     public static final String SQL_CREATE_USER = "INSERT INTO users (firstname, lastname, dateofbirth) VALUES (?, ?, ?)";
     public static final String SQL_IDENTITY = "call IDENTITY()";
-
     public static final String SQL_FIND_ALL = "SELECT id, firstname, lastname, dateofbirth FROM users";
 }

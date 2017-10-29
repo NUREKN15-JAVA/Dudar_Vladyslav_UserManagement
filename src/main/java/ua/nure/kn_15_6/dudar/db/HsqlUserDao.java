@@ -81,4 +81,12 @@ public class HsqlUserDao implements UserDao {
         }
         return allUsers;
     }
+
+    public ConnectionFactory getConnectionFactory() {
+        return connectionFactory;
+    }
+
+    public void setConnectionFactory(ConnectionFactory connectionFactory) {
+        this.connectionFactory = connectionFactory;
+    }
 }

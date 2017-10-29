@@ -11,4 +11,7 @@ public interface UserDao {
     void delete(User user) throws SQLException;
     User find(Long id) throws SQLException;
     Collection findAll() throws SQLException;
+
+    ConnectionFactory getConnectionFactory();
+    void setConnectionFactory(ConnectionFactory connectionFactory);
 }
