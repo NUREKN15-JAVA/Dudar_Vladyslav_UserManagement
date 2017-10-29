@@ -1,23 +1,34 @@
 package ua.nure.kn_15_6.dudar.db;
 
+import ua.nure.kn_15_6.dudar.Constants;
 import ua.nure.kn_15_6.dudar.User;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Collection;
 
 public class HsqlUserDao implements UserDao {
-    private static String URL = "jdbc:hsqldb:file:/res/db/userdb";
-    private Connection conn;
+    private ConnectionFactory connectionFactory;
 
     public HsqlUserDao() {
-//        conn = DriverManager.getConnection(URL, "SA", "");
     }
 
+    public HsqlUserDao(ConnectionFactory connectionFactory) {
+        this.connectionFactory = connectionFactory;
+    }
 
     @Override
     public User create(User user) throws SQLException {
+        Connection conn = connectionFactory.createConnection();
+        try(PreparedStatement ps = conn.prepareStatement(Constants.CREATE_USER)) {
+            ps.setString(1, user.getFirstName());
+            ps.setString(2, user.getLastName());
+            ps.setDate(3, Date.valueOf(user.getBirthDate()));
+            int n = ps.executeUpdate();
+
+            if (n != 1) {
+                throw new SQLException("Number of the inserted rows: " + n);
+            }
+        }
         return null;
     }
 
