@@ -17,7 +17,7 @@ public class ConnectionFactoryImpl implements ConnectionFactory {
         try {
             Class.forName(DRIVER);
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException(Constants.ERROR_TO_LOAD_JDBC);
+            throw new RuntimeException(Constants.ERR_FAILED_TO_LOAD_JDBC);
         }
 
         return DriverManager.getConnection(URL, USER, PASS);

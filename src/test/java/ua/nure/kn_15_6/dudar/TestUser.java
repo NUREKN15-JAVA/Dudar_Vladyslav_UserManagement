@@ -37,7 +37,7 @@ public class TestUser extends TestCase {
             user.getFullName();
             fail();
         } catch (Exception e) {
-            assertEquals(e.getMessage(), Constants.NO_NAME_ERR);
+            assertEquals(e.getMessage(), Constants.ERR_NO_NAME);
         }
     }
 
@@ -46,7 +46,7 @@ public class TestUser extends TestCase {
             user.getAge();
             fail();
         } catch (Exception e) {
-            assertEquals(e.getMessage(), Constants.NO_BIRTHDATE_ERR);
+            assertEquals(e.getMessage(), Constants.ERR_NO_BIRTHDATE);
         }
     }
 }

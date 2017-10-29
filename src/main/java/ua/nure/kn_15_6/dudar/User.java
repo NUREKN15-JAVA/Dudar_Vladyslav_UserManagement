@@ -56,7 +56,7 @@ public class User {
 
     public String getFullName() throws Exception{
         if (firstName == null || lastName == null)
-            throw new IllegalArgumentException(Constants.NO_NAME_ERR);
+            throw new IllegalArgumentException(Constants.ERR_NO_NAME);
         return String.format("%s, %s", getLastName(), getFirstName());
     }
 
@@ -64,7 +64,7 @@ public class User {
         if (birthDate != null) {
             return Period.between(birthDate, LocalDate.now()).getYears();
         } else {
-            throw new IllegalArgumentException(Constants.NO_BIRTHDATE_ERR);
+            throw new IllegalArgumentException(Constants.ERR_NO_BIRTHDATE);
         }
     }
 }
