@@ -15,28 +15,29 @@ public class HsqlUserDao implements UserDao {
 //        conn = DriverManager.getConnection(URL, "SA", "");
     }
 
+
     @Override
-    public User create(User user) {
+    public User create(User user) throws SQLException {
         return null;
     }
 
     @Override
-    public void update(User user) {
+    public void update(User user) throws SQLException {
 
     }
 
     @Override
-    public void delete(User user) {
+    public void delete(User user) throws SQLException {
 
     }
 
     @Override
-    public User find(Long id) {
+    public User find(Long id) throws SQLException {
         return null;
     }
 
     @Override
-    public Collection findAll() {
+    public Collection findAll() throws SQLException {
         return null;
     }
 }
