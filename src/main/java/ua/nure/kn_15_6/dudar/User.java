@@ -1,7 +1,9 @@
 package ua.nure.kn_15_6.dudar;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Objects;
 
 /**
  * Created by Vlad on 30.09.2017.
@@ -56,7 +58,7 @@ public class User {
 
     public String getFullName() throws Exception{
         if (firstName == null || lastName == null)
-            throw new IllegalArgumentException(Constants.NO_NAME_ERR);
+            throw new IllegalArgumentException(Constants.ERR_NO_NAME);
         return String.format("%s, %s", getLastName(), getFirstName());
     }
 
@@ -64,7 +66,33 @@ public class User {
         if (birthDate != null) {
             return Period.between(birthDate, LocalDate.now()).getYears();
         } else {
-            throw new IllegalArgumentException(Constants.NO_BIRTHDATE_ERR);
+            throw new IllegalArgumentException(Constants.ERR_NO_BIRTHDATE);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == this) return true;
+        if (!(o instanceof User)) {
+            return false;
+        }
+
+        User user = (User) o;
+
+        return user.getFirstName().equals(this.firstName) &&
+                user.getLastName().equals(this.lastName) &&
+                Objects.equals(user.getId(), this.id) &&
+                user.getBirthDate().equals(this.birthDate);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31 * result + id.hashCode();
+        result = 31 * result + firstName.hashCode();
+        result = 31 * result + lastName.hashCode();
+        result = 31 * result + birthDate.hashCode();
+        return result;
     }
 }
