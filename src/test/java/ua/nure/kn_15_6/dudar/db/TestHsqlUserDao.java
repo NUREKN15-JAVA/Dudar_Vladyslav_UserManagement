@@ -6,13 +6,15 @@ import ua.nure.kn_15_6.dudar.User;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-public class TestHsqlUserDao extends TestCase{
+public class TestHsqlUserDao extends TestCase {
+    private ConnectionFactory connectionFactory;
     private HsqlUserDao dao;
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        dao = new HsqlUserDao();
+        connectionFactory = new ConnectionFactoryImpl();
+        dao = new HsqlUserDao(connectionFactory);
     }
 
     public void testCreate() {
