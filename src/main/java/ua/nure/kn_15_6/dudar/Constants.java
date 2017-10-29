@@ -13,4 +13,6 @@ public class Constants {
     //SQL Queries
     public static final String SQL_CREATE_USER = "INSERT INTO users (firstname, lastname, dateofbirth) VALUES (?, ?, ?)";
     public static final String SQL_IDENTITY = "call IDENTITY()";
+
+    public static final String SQL_FIND_ALL = "SELECT id, firstname, lastname, dateofbirth FROM users";
 }

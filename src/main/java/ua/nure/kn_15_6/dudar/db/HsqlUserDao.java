@@ -4,7 +4,11 @@ import ua.nure.kn_15_6.dudar.Constants;
 import ua.nure.kn_15_6.dudar.User;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 public class HsqlUserDao implements UserDao {
     private ConnectionFactory connectionFactory;
@@ -60,7 +64,21 @@ public class HsqlUserDao implements UserDao {
     }
 
     @Override
-    public Collection findAll() throws SQLException {
-        return null;
+    public Collection<User> findAll() throws SQLException {
+        List<User> allUsers;
+        try(Connection conn = connectionFactory.createConnection();
+            Statement st = conn.createStatement();
+            ResultSet res = st.executeQuery(Constants.SQL_FIND_ALL)) {
+
+            allUsers = new LinkedList<>();
+            while (res.next()) {
+                long id = res.getLong(1);
+                String firstName = res.getString(2);
+                String lastName = res.getString(3);
+                LocalDate dateOfBirth = res.getDate(4).toLocalDate();
+                allUsers.add(new User(id, firstName, lastName, dateOfBirth));
+            }
+        }
+        return allUsers;
     }
 }
