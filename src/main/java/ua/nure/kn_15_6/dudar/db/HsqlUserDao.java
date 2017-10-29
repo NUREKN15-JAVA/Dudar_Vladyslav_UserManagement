@@ -18,8 +18,9 @@ public class HsqlUserDao implements UserDao {
 
     @Override
     public User create(User user) throws SQLException {
-        Connection conn = connectionFactory.createConnection();
-        try(PreparedStatement ps = conn.prepareStatement(Constants.CREATE_USER)) {
+        try(Connection conn = connectionFactory.createConnection();
+            PreparedStatement ps = conn.prepareStatement(Constants.SQL_CREATE_USER)) {
+
             ps.setString(1, user.getFirstName());
             ps.setString(2, user.getLastName());
             ps.setDate(3, Date.valueOf(user.getBirthDate()));
@@ -28,8 +29,19 @@ public class HsqlUserDao implements UserDao {
             if (n != 1) {
                 throw new SQLException("Number of the inserted rows: " + n);
             }
+
+            try(CallableStatement cs = conn.prepareCall(Constants.SQL_IDENTITY);
+                ResultSet keys = cs.executeQuery()) {
+
+                if (keys.next()) {
+                    user.setId(keys.getLong(1));
+                } else {
+                    throw new SQLException(Constants.ERR_NO_USER);
+                }
+            }
         }
-        return null;
+
+        return user;
     }
 
     @Override
