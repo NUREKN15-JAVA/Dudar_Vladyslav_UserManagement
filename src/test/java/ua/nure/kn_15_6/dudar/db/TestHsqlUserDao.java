@@ -19,8 +19,8 @@ public class TestHsqlUserDao extends DatabaseTestCase {
 
     @Override
     protected IDatabaseConnection getConnection() throws Exception {
-        connectionFactory = new ConnectionFactoryImpl();
-        return new DatabaseConnection(connectionFactory.createConnection());
+//        connectionFactory = new ConnectionFactoryImpl();
+        return new DatabaseConnection(DaoFactory.getInstance().getConnectionFactory().createConnection());
     }
 
     @Override
@@ -31,7 +31,7 @@ public class TestHsqlUserDao extends DatabaseTestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        dao = new HsqlUserDao(connectionFactory);
+        dao = (HsqlUserDao) DaoFactory.getInstance().getUserDao();
     }
 
     public void testCreate() {
@@ -55,6 +55,48 @@ public class TestHsqlUserDao extends DatabaseTestCase {
             Collection<User> allUsers = dao.findAll();
             assertNotNull("Collection is null", allUsers);
             assertEquals("Collection size", 1, allUsers.size());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            fail(e.toString());
+        }
+    }
+
+    public void testFind() {
+        try {
+            final Long id = 0L;
+            User foundUser = dao.find(id);
+            assertNotNull("User is null", foundUser);
+            assertEquals("Different id", id, foundUser.getId());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            fail(e.toString());
+        }
+    }
+
+    public void testUpdate() {
+        try {
+            final Long id=0L;
+            User foundUser = dao.find(id);
+            assertNotNull("User is null", foundUser);
+            foundUser.setFirstName("Josh");
+            dao.update(foundUser);
+            User updatedUser = dao.find(foundUser.getId());
+            assertNotNull("Updated user is null", updatedUser);
+            assertEquals(foundUser, updatedUser);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            fail(e.toString());
+        }
+    }
+
+    public void testDelete() throws Exception {
+        try {
+            final Long id = 0L;
+            User foundUser = dao.find(id);
+            assertNotNull("User is null", foundUser);
+            dao.delete(foundUser);
+            User deletedUser = dao.find(foundUser.getId());
+            assertNull(deletedUser);
         } catch (SQLException e) {
             e.printStackTrace();
             fail(e.toString());
