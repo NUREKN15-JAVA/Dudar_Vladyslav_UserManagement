@@ -1,6 +1,7 @@
 package ua.nure.kn_15_6.dudar.view;
 
 import ua.nure.kn_15_6.dudar.Constants;
+import ua.nure.kn_15_6.dudar.util.Messages;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,7 +26,7 @@ public class MainFrame extends JFrame {
     private void initialize() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-        this.setTitle(Constants.MAIN_FRAME_NAME);
+        this.setTitle(Messages.getString("user_management"));
         this.setContentPane(getContentPanel());
 
         contentPanel.add(getBrowsePanel(), BorderLayout.CENTER);

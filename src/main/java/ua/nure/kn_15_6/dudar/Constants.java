@@ -19,8 +19,5 @@ public class Constants {
     public static final String SQL_DELETE = "DELETE FROM users WHERE id=?";
     public static final String SQL_SELECT_BY_ID = "SELECT * FROM users WHERE id=?";
 
-    //Strings
-    public static final String MAIN_FRAME_NAME = "User Management";
-
     //Components names
 }
