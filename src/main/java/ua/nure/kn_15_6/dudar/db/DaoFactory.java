@@ -6,19 +6,29 @@ import ua.nure.kn_15_6.dudar.User;
 import java.io.IOException;
 import java.util.Properties;
 
-public class DaoFactory {
-    private static final String USER_DAO = "ua.nure.kn_15_6.dudar.db.UserDao";
-    private final Properties properties;
+public abstract class DaoFactory {
+    protected static final String USER_DAO = "ua.nure.kn_15_6.dudar.db.UserDao";
+    private static final String DAO_FACTORY = "dao.factory";
+    protected static Properties properties;
 
     private static volatile DaoFactory instance;
 
-    private DaoFactory() {
+    static{
         properties = new Properties();
         try {
-            properties.load(getClass().getClassLoader().getResourceAsStream("settings.properties"));
+            properties.load(DaoFactory.class.getClassLoader().getResourceAsStream(
+                    "settings.properties"));
         } catch (IOException e) {
-            System.err.println(Constants.ERR_FAILED_TO_GET_PROPERTIES);
+            throw new RuntimeException(e);
         }
+    }
+
+    protected DaoFactory() {
+    }
+
+    public static void init(Properties prop) {
+        properties = prop;
+        instance = null;
     }
 
     public static DaoFactory getInstance() {
@@ -27,14 +37,21 @@ public class DaoFactory {
             synchronized (DaoFactory.class) {
                 localInstance = instance;
                 if (localInstance == null) {
-                    instance = localInstance = new DaoFactory();
+                    Class factoryClass = null;
+                    try {
+                        factoryClass = Class.forName(properties
+                                .getProperty(DAO_FACTORY));
+                        instance = localInstance = (DaoFactory) factoryClass.newInstance();
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
         }
         return localInstance;
     }
 
-    public ConnectionFactory getConnectionFactory() {
+    protected ConnectionFactory getConnectionFactory() {
         String driver = properties.getProperty("connection.driver");
         String url = properties.getProperty("connection.url");
         String user = properties.getProperty("connection.user");
@@ -42,19 +59,5 @@ public class DaoFactory {
         return new ConnectionFactoryImpl(driver, url, user, password);
     }
 
-    public UserDao getUserDao() {
-        UserDao result = null;
-
-        try {
-            Class clazz = Class.forName(properties.getProperty(USER_DAO));
-            UserDao userDao = (UserDao) clazz.newInstance();
-            userDao.setConnectionFactory(getConnectionFactory());
-            result = userDao;
-        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Failed to get UserDao class");
-        }
-
-        return result;
-    }
+    public abstract UserDao getUserDao();
 }

@@ -5,6 +5,7 @@ import ua.nure.kn_15_6.dudar.Constants;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class ConnectionFactoryImpl implements ConnectionFactory {
     private String driver;
@@ -21,6 +22,15 @@ public class ConnectionFactoryImpl implements ConnectionFactory {
         this.user = user;
         this.pass = pass;
     }
+
+    public ConnectionFactoryImpl(Properties properties) {
+        this.driver = properties.getProperty("connection.driver");
+        this.url = properties.getProperty("connection.url");
+        this.user = properties.getProperty("connection.user");
+        this.pass = properties.getProperty("connection.password");
+    }
+
+
 
     @Override
     public Connection createConnection() throws SQLException {
