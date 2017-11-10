@@ -21,4 +21,6 @@ public class Constants {
 
     //Strings
     public static final String MAIN_FRAME_NAME = "User Management";
+
+    //Components names
 }

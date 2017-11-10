@@ -6,11 +6,12 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainFrame extends JFrame {
-    private static final int FRAME_WIDTH = 800;
-    private static final int FRAME_HEIGHT = 600;
+    private static final int FRAME_WIDTH = 600;
+    private static final int FRAME_HEIGHT = 400;
 
     private JPanel contentPanel;
     private JPanel browsePanel;
+    private AddPanel addPanel;
 
     public static void main(String[] args) {
         MainFrame frame = new MainFrame();
@@ -43,5 +44,22 @@ public class MainFrame extends JFrame {
             browsePanel = new BrowsePanel(this);
         }
         return browsePanel;
+    }
+
+    public void showAddPanel() {
+        showPanel(getAddPanel());
+    }
+
+    private void showPanel(JPanel panel) {
+        getContentPanel().add(panel, BorderLayout.CENTER);
+        panel.setVisible(true);
+        panel.repaint();
+    }
+
+    public AddPanel getAddPanel() {
+        if (addPanel == null) {
+            addPanel = new AddPanel(this);
+        }
+        return addPanel;
     }
 }

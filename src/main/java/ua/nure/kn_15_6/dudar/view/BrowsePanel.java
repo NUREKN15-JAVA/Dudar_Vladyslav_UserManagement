@@ -26,39 +26,42 @@ public class BrowsePanel extends JPanel implements ActionListener {
         this.add(getTablePanel(), BorderLayout.CENTER);
         this.add(getButtonPanel(), BorderLayout.SOUTH);
 
-        buttonPanel.add(getButton("Add"));
-        buttonPanel.add(getButton("Edit"));
-        buttonPanel.add(getButton("Delete"));
-        buttonPanel.add(getButton("Details"));
+        buttonPanel.add(getButton("addButton"));
+        buttonPanel.add(getButton("editButton"));
+        buttonPanel.add(getButton("deleteButton"));
+        buttonPanel.add(getButton("detailsButton"));
     }
 
-    private JButton getButton(String text) {
-        JButton button = new JButton(text);
-        button.setSize(100,50);
+    private JButton getButton(String name) {
+        JButton button = new JButton(name);
+        button.setName(name);
+        button.setSize(100, 50);
         button.addActionListener(this);
-        switch (text) {
-            case "Add":
-                button.setName("addButton");
+        switch (name) {
+            case "addButton":
+                button.setText("Add");
+                button.setActionCommand("add");
                 if (addButton != null)
                     button = addButton;
                 break;
-            case "Edit":
-                button.setName("editButton");
+            case "editButton":
+                button.setText("Edit");
+                button.setActionCommand("edit");
                 if (editButton != null)
                     button = editButton;
                 break;
-            case "Delete":
-                button.setName("deleteButton");
+            case "deleteButton":
+                button.setText("Delete");
+                button.setActionCommand("delete");
                 if (deleteButton != null)
                     button = deleteButton;
                 break;
-            case "Details":
-                button.setName("detailsButton");
+            case "detailsButton":
+                button.setText("Details");
+                button.setActionCommand("details");
                 if (detailsButton != null)
                     button = detailsButton;
                 break;
-            default:
-                button.setName(text.toLowerCase().replaceAll(" ", "") + "Button");
         }
         return button;
     }
@@ -79,17 +82,17 @@ public class BrowsePanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() instanceof JButton) {
-            switch (((JButton)e.getSource()).getName()) {
-                case "addButton":
-                    break;
-                case "editButton":
-                    break;
-                case "deleteButton":
-                    break;
-                case "detailsButton":
-                    break;
-            }
+        switch (e.getActionCommand()) {
+            case "add":
+                this.setVisible(false);
+                parent.showAddPanel();
+                break;
+            case "edit":
+                break;
+            case "delete":
+                break;
+            case "details":
+                break;
         }
     }
 
