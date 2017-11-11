@@ -97,12 +97,21 @@ public class BrowsePanel extends JPanel implements ActionListener {
                 parent.showAddPanel();
                 break;
             case "edit":
+                if (getUserTable().getSelectedRow() != -1) {
+                    this.setVisible(false);
+                    parent.showEditPanel(getSelectedUser());
+                }
                 break;
             case "delete":
                 break;
             case "details":
                 break;
         }
+    }
+
+    private User getSelectedUser() {
+        int row = getUserTable().getSelectedRow();
+        return ((UserTableModel) getUserTable().getModel()).getUserAt(row);
     }
 
     public JTable getUserTable() {

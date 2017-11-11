@@ -12,7 +12,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class AddPanel extends JPanel implements ActionListener {
+public class EditPanel extends JPanel implements ActionListener {
+    private User user;
+
     private static final Color BG_COLOR = Color.WHITE;
     private final MainFrame parent;
     private JPanel fieldPanel;
@@ -23,16 +25,26 @@ public class AddPanel extends JPanel implements ActionListener {
     private JTextField lastNameField;
     private JTextField dateOfBirthField;
 
-    public AddPanel(MainFrame frame) {
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+
+    public EditPanel(MainFrame frame) {
         this.parent = frame;
         initialize();
     }
 
     private void initialize() {
-        this.setName("addPanel");
+        this.setName("editPanel");
         this.setLayout(new BorderLayout());
         this.add(getFieldPanel(), BorderLayout.NORTH);
         this.add(getButtonPanel(), BorderLayout.SOUTH);
+    }
+
+    public void setUser(User user) {
+        this.user = user.copy();
+
+        getField("firstNameField").setText(user.getFirstName());
+        getField("lastNameField").setText(user.getLastName());
+        getField("dateOfBirthField").setText(formatter.format(user.getBirthDate()));
     }
 
     public JPanel getFieldPanel() {
@@ -40,9 +52,9 @@ public class AddPanel extends JPanel implements ActionListener {
             fieldPanel = new JPanel();
             fieldPanel.setLayout(new GridLayout(3, 2));
 
-            addLabeledField(fieldPanel, Messages.getString("AddPanel.first_name"), getField("firstNameField"));
-            addLabeledField(fieldPanel, Messages.getString("AddPanel.last_name"), getField("lastNameField"));
-            addLabeledField(fieldPanel, Messages.getString("AddPanel.date_of_birth"), getField("dateOfBirthField"));
+            addLabeledField(fieldPanel, Messages.getString("EditPanel.first_name"), getField("firstNameField"));
+            addLabeledField(fieldPanel, Messages.getString("EditPanel.last_name"), getField("lastNameField"));
+            addLabeledField(fieldPanel, Messages.getString("EditPanel.date_of_birth"), getField("dateOfBirthField"));
         }
         return fieldPanel;
     }
@@ -71,14 +83,14 @@ public class AddPanel extends JPanel implements ActionListener {
         button.addActionListener(this);
         switch (name) {
             case "okButton":
-                button.setText(Messages.getString("AddPanel.ok"));
+                button.setText(Messages.getString("EditPanel.ok"));
                 button.setActionCommand("ok");
                 if (okButton != null)
                     button = okButton;
                 else okButton = button;
                 break;
             case "cancelButton":
-                button.setText(Messages.getString("AddPanel.cancel"));
+                button.setText(Messages.getString("EditPanel.cancel"));
                 button.setActionCommand("cancel");
                 if (cancelButton != null)
                     button = cancelButton;
@@ -116,13 +128,12 @@ public class AddPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case "ok":
-                User user = new User();
                 user.setFirstName(getField("firstNameField").getText());
                 user.setLastName(getField("lastNameField").getText());
                 try {
                     String date = getField("dateOfBirthField").getText();
-                    user.setBirthDate(LocalDate.parse(date, DateTimeFormatter.ofPattern("d/MM/yyyy")));
-                    parent.getDao().create(user);
+                    user.setBirthDate(LocalDate.parse(date, formatter));
+                    parent.getDao().update(user);
                     clearFields();
 
                     this.setVisible(false);
@@ -149,4 +160,6 @@ public class AddPanel extends JPanel implements ActionListener {
         dateOfBirthField.setText("");
         dateOfBirthField.setBackground(BG_COLOR);
     }
+
+
 }

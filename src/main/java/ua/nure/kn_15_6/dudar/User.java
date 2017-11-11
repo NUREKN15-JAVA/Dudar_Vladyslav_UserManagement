@@ -56,7 +56,7 @@ public class User {
         this.birthDate = birthDate;
     }
 
-    public String getFullName() throws Exception{
+    public String getFullName() throws Exception {
         if (firstName == null || lastName == null)
             throw new IllegalArgumentException(Constants.ERR_NO_NAME);
         return String.format("%s, %s", getLastName(), getFirstName());
@@ -94,5 +94,9 @@ public class User {
         result = 31 * result + lastName.hashCode();
         result = 31 * result + birthDate.hashCode();
         return result;
+    }
+
+    public User copy() {
+        return new User(id, firstName, lastName, getBirthDate());
     }
 }

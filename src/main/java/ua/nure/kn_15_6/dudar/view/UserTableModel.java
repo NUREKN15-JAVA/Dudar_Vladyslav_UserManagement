@@ -1,5 +1,6 @@
 package ua.nure.kn_15_6.dudar.view;
 
+import ua.nure.kn_15_6.dudar.Constants;
 import ua.nure.kn_15_6.dudar.User;
 import ua.nure.kn_15_6.dudar.util.Messages;
 
@@ -47,5 +48,11 @@ public class UserTableModel extends AbstractTableModel {
 
     public String getColumnName(int colNum) {
         return COLUMN_NAMES[colNum];
+    }
+
+    public User getUserAt(int rowIndex) {
+        if (users.isEmpty())
+            throw new RuntimeException(Constants.ERR_NO_USER);
+        return users.get(rowIndex);
     }
 }

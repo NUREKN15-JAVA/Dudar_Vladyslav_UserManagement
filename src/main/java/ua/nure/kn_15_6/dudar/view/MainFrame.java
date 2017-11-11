@@ -1,6 +1,7 @@
 package ua.nure.kn_15_6.dudar.view;
 
 import ua.nure.kn_15_6.dudar.Constants;
+import ua.nure.kn_15_6.dudar.User;
 import ua.nure.kn_15_6.dudar.db.DaoFactory;
 import ua.nure.kn_15_6.dudar.db.UserDao;
 import ua.nure.kn_15_6.dudar.util.Messages;
@@ -18,6 +19,7 @@ public class MainFrame extends JFrame {
     private JPanel contentPanel;
     private JPanel browsePanel;
     private AddPanel addPanel;
+    private EditPanel editPanel;
 
     public static void main(String[] args) {
         MainFrame frame = new MainFrame();
@@ -55,18 +57,28 @@ public class MainFrame extends JFrame {
         return browsePanel;
     }
 
+    public JPanel getEditPanel() {
+        if (editPanel == null) {
+            editPanel = new EditPanel(this);
+        }
+        return editPanel;
+    }
+
     public void showAddPanel() {
         showPanel(getAddPanel());
     }
 
     public void showBrowsePanel() {
         showPanel(getBrowsePanel());
-//        getBrowsePanel().setVisible(true);
-//        getBrowsePanel().repaint();
+    }
+
+    public void showEditPanel(User user) {
+        ((EditPanel) getEditPanel()).setUser(user);
+        showPanel(getEditPanel());
     }
 
     private void showPanel(JPanel panel) {
-        if(!Arrays.asList(getContentPanel().getComponents()).contains(panel)) {
+        if (!Arrays.asList(getContentPanel().getComponents()).contains(panel)) {
             getContentPanel().add(panel, BorderLayout.CENTER);
         }
         getContentPanel().add(panel, BorderLayout.CENTER);
