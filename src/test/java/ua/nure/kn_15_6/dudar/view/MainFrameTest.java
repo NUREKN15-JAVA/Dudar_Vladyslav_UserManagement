@@ -213,4 +213,29 @@ public class MainFrameTest extends JFCTestCase {
         }
         return btn;
     }
+
+    public void testDetails() throws Exception {
+        mockUserDao.expectAndReturn("findAll", users);
+
+        JTable userTable = (JTable) find(JTable.class, "userTable");
+        assertEquals(1, userTable.getRowCount());
+
+        userTable.setRowSelectionInterval(0, 0);
+
+        JButton detailsButton = (JButton) find(JButton.class, "detailsButton");
+        getHelper().enterClickAndLeave(new MouseEventData(this, detailsButton));
+
+        find(JPanel.class, "detailsPanel");
+        find(JLabel.class, "idLabel");
+        find(JLabel.class, "firstNameLabel");
+        find(JLabel.class, "lastNameLabel");
+        find(JLabel.class, "dateOfBirthLabel");
+        JButton cancelButton = (JButton) find(JButton.class, "cancelButton");
+
+        getHelper().enterClickAndLeave(new MouseEventData(this, cancelButton));
+
+        find(JPanel.class, "browsePanel");
+        userTable = (JTable) find(JTable.class, "userTable");
+        assertEquals(1, userTable.getRowCount());
+    }
 }
