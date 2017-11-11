@@ -4,6 +4,7 @@ import junit.extensions.jfcunit.JFCTestCase;
 import junit.extensions.jfcunit.JFCTestHelper;
 import junit.extensions.jfcunit.eventdata.MouseEventData;
 import junit.extensions.jfcunit.finder.NamedComponentFinder;
+import ua.nure.kn_15_6.dudar.util.Messages;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,7 +36,13 @@ public class MainFrameTest extends JFCTestCase {
 
     public void testBrowseControls() throws Exception {
         find(JPanel.class, "browsePanel");
-        find(JTable.class, "userTable");
+
+        JTable table = (JTable) find(JTable.class, "userTable");
+        assertEquals(3, table.getColumnCount());
+        assertEquals(Messages.getString("UserTableModel.id"),table.getColumnName(0));
+        assertEquals(Messages.getString("UserTableModel.first_name"),table.getColumnName(1));
+        assertEquals(Messages.getString("UserTableModel.last_name"),table.getColumnName(2));
+
         find(JButton.class, "addButton");
         find(JButton.class, "editButton");
         find(JButton.class, "deleteButton");

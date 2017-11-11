@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class BrowsePanel extends JPanel implements ActionListener {
     private MainFrame parent;
@@ -102,6 +103,8 @@ public class BrowsePanel extends JPanel implements ActionListener {
         if (userTable == null) {
             userTable = new JTable();
             userTable.setName("userTable");
+            UserTableModel model = new UserTableModel(new ArrayList<>());
+            userTable.setModel(model);
         }
         return userTable;
     }
