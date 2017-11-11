@@ -24,6 +24,12 @@ public class User {
         this.birthDate = date;
     }
 
+    public User(String firstName, String lastName, LocalDate birthDate) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+    }
+
     public Long getId() {
         return id;
     }
@@ -56,7 +62,7 @@ public class User {
         this.birthDate = birthDate;
     }
 
-    public String getFullName() throws Exception{
+    public String getFullName() throws Exception {
         if (firstName == null || lastName == null)
             throw new IllegalArgumentException(Constants.ERR_NO_NAME);
         return String.format("%s, %s", getLastName(), getFirstName());
@@ -73,26 +79,32 @@ public class User {
     @Override
     public boolean equals(Object o) {
 
-        if (o == this) return true;
-        if (!(o instanceof User)) {
+        if (o == null) {
             return false;
         }
+        if (this == o) {
+            return true;
+        }
+        if (this.getId() == null && ((User) o).getId() == null) {
+            return true;
+        }
 
-        User user = (User) o;
-
-        return user.getFirstName().equals(this.firstName) &&
-                user.getLastName().equals(this.lastName) &&
-                Objects.equals(user.getId(), this.id) &&
-                user.getBirthDate().equals(this.birthDate);
+        return this.getId().equals(((User) o).getId());
     }
 
     @Override
     public int hashCode() {
+        if (this.getId() == null)
+            return 0;
         int result = 17;
         result = 31 * result + id.hashCode();
-        result = 31 * result + firstName.hashCode();
-        result = 31 * result + lastName.hashCode();
-        result = 31 * result + birthDate.hashCode();
+//        result = 31 * result + firstName.hashCode();
+//        result = 31 * result + lastName.hashCode();
+//        result = 31 * result + birthDate.hashCode();
         return result;
+    }
+
+    public User copy() {
+        return new User(id, firstName, lastName, getBirthDate());
     }
 }
