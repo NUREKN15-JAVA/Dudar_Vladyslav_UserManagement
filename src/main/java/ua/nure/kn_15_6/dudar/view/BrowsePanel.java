@@ -103,6 +103,10 @@ public class BrowsePanel extends JPanel implements ActionListener {
                 }
                 break;
             case "delete":
+                if (getUserTable().getSelectedRow() != -1) {
+                    User selectedUser = getSelectedUser();
+                    parent.showDeleteDialog(selectedUser);
+                }
                 break;
             case "details":
                 break;

@@ -8,6 +8,7 @@ import ua.nure.kn_15_6.dudar.util.Messages;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -95,5 +96,23 @@ public class MainFrame extends JFrame {
 
     public UserDao getDao() {
         return dao;
+    }
+
+    public void showDeleteDialog(User selectedUser) {
+        JFrame deleteFrame = new JFrame();
+        deleteFrame.setName("deleteFrame");
+        if (JOptionPane.showConfirmDialog(deleteFrame,
+                Messages.getString("BrowsePanel.delete_q") + " " +
+                        selectedUser.getFirstName() + " " + selectedUser.getLastName() + "?",
+                Messages.getString("BrowsePanel.delete_title"),
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+
+            try {
+                getDao().delete(selectedUser);
+                getBrowsePanel();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
 }
