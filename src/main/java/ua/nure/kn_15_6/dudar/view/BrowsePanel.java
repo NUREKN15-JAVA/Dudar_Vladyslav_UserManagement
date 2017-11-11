@@ -109,6 +109,10 @@ public class BrowsePanel extends JPanel implements ActionListener {
                 }
                 break;
             case "details":
+                if (getUserTable().getSelectedRow() != -1) {
+                    this.setVisible(false);
+                    parent.showDetailsPanel(getSelectedUser());
+                }
                 break;
         }
     }

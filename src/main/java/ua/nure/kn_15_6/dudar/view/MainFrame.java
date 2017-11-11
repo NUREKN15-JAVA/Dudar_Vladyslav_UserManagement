@@ -21,6 +21,7 @@ public class MainFrame extends JFrame {
     private JPanel browsePanel;
     private AddPanel addPanel;
     private EditPanel editPanel;
+    private JPanel detailsPanel;
 
     public static void main(String[] args) {
         MainFrame frame = new MainFrame();
@@ -87,11 +88,18 @@ public class MainFrame extends JFrame {
         panel.repaint();
     }
 
-    public AddPanel getAddPanel() {
+    public JPanel getAddPanel() {
         if (addPanel == null) {
             addPanel = new AddPanel(this);
         }
         return addPanel;
+    }
+
+    public JPanel getDetailsPanel() {
+        if (detailsPanel == null) {
+            detailsPanel = new DetailsPanel(this);
+        }
+        return detailsPanel;
     }
 
     public UserDao getDao() {
@@ -114,5 +122,10 @@ public class MainFrame extends JFrame {
                 JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
+    }
+
+    public void showDetailsPanel(User user) {
+        ((DetailsPanel) getDetailsPanel()).setUser(user);
+        showPanel(getDetailsPanel());
     }
 }
