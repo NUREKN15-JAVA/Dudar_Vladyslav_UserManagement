@@ -1,13 +1,19 @@
 package ua.nure.kn_15_6.dudar.view;
 
+import ua.nure.kn_15_6.dudar.User;
 import ua.nure.kn_15_6.dudar.util.Messages;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class AddPanel extends JPanel implements ActionListener {
+    private static final Color BG_COLOR = Color.WHITE;
     private final MainFrame parent;
     private JPanel fieldPanel;
     private JPanel buttonPanel;
@@ -69,12 +75,14 @@ public class AddPanel extends JPanel implements ActionListener {
                 button.setActionCommand("ok");
                 if (okButton != null)
                     button = okButton;
+                else okButton = button;
                 break;
             case "cancelButton":
                 button.setText(Messages.getString("AddPanel.cancel"));
                 button.setActionCommand("cancel");
                 if (cancelButton != null)
                     button = cancelButton;
+                else cancelButton = button;
                 break;
         }
         return button;
@@ -87,15 +95,18 @@ public class AddPanel extends JPanel implements ActionListener {
         switch (name) {
             case "firstNameField":
                 if (firstNameField != null)
-                    field = firstNameField;
+                    return firstNameField;
+                else firstNameField = field;
                 break;
             case "lastNameField":
                 if (lastNameField != null)
-                    field = lastNameField;
+                    return lastNameField;
+                else lastNameField = field;
                 break;
             case "dateOfBirthField":
                 if (dateOfBirthField != null)
-                    field = dateOfBirthField;
+                    return dateOfBirthField;
+                else dateOfBirthField = field;
                 break;
         }
         return field;
@@ -105,9 +116,35 @@ public class AddPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case "ok":
+                User user = new User();
+                user.setFirstName(getField("firstNameField").getText());
+                user.setLastName(getField("lastNameField").getText());
+                try {
+                    String date = getField("dateOfBirthField").getText();
+                    user.setBirthDate(LocalDate.parse(date, DateTimeFormatter.ofPattern("d/MM/yyyy")));
+                    parent.getDao().create(user);
+                    clearFields();
+
+                    this.setVisible(false);
+                    parent.showBrowsePanel();
+                } catch (DateTimeParseException e1) {
+                    getField("dateOfBirthField").setBackground(Color.RED);
+                } catch (SQLException e1) {
+                    JOptionPane.showMessageDialog(this, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
                 break;
             case "cancel":
+                parent.showBrowsePanel();
                 break;
         }
+    }
+
+    private void clearFields() {
+        firstNameField.setText("");
+        firstNameField.setBackground(BG_COLOR);
+        lastNameField.setText("");
+        lastNameField.setBackground(BG_COLOR);
+        dateOfBirthField.setText("");
+        dateOfBirthField.setBackground(BG_COLOR);
     }
 }

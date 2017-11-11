@@ -1,19 +1,16 @@
 package ua.nure.kn_15_6.dudar.db;
 
-import ua.nure.kn_15_6.dudar.Constants;
-import ua.nure.kn_15_6.dudar.User;
-
 import java.io.IOException;
 import java.util.Properties;
 
 public abstract class DaoFactory {
-    protected static final String USER_DAO = "ua.nure.kn_15_6.dudar.db.UserDao";
+    protected static final String USER_DAO = "dao.db.UserDao";
     private static final String DAO_FACTORY = "dao.factory";
     protected static Properties properties;
 
     private static volatile DaoFactory instance;
 
-    static{
+    static {
         properties = new Properties();
         try {
             properties.load(DaoFactory.class.getClassLoader().getResourceAsStream(
@@ -24,6 +21,7 @@ public abstract class DaoFactory {
     }
 
     protected DaoFactory() {
+
     }
 
     public static void init(Properties prop) {

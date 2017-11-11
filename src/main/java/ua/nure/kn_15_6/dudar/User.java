@@ -73,17 +73,17 @@ public class User {
     @Override
     public boolean equals(Object o) {
 
-        if (o == this) return true;
-        if (!(o instanceof User)) {
+        if (o == null) {
             return false;
         }
+        if (this == o) {
+            return true;
+        }
+        if (this.getId() == null && ((User) o).getId() == null) {
+            return true;
+        }
 
-        User user = (User) o;
-
-        return user.getFirstName().equals(this.firstName) &&
-                user.getLastName().equals(this.lastName) &&
-                Objects.equals(user.getId(), this.id) &&
-                user.getBirthDate().equals(this.birthDate);
+        return this.getId().equals(((User) o).getId());
     }
 
     @Override

@@ -1,11 +1,13 @@
 package ua.nure.kn_15_6.dudar.view;
 
+import ua.nure.kn_15_6.dudar.User;
 import ua.nure.kn_15_6.dudar.util.Messages;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class BrowsePanel extends JPanel implements ActionListener {
@@ -46,24 +48,28 @@ public class BrowsePanel extends JPanel implements ActionListener {
                 button.setActionCommand("add");
                 if (addButton != null)
                     button = addButton;
+                else addButton = button;
                 break;
             case "editButton":
                 button.setText(Messages.getString("BrowsePanel.edit"));
                 button.setActionCommand("edit");
                 if (editButton != null)
                     button = editButton;
+                else editButton = button;
                 break;
             case "deleteButton":
                 button.setText(Messages.getString("BrowsePanel.delete"));
                 button.setActionCommand("delete");
                 if (deleteButton != null)
                     button = deleteButton;
+                else deleteButton = button;
                 break;
             case "detailsButton":
                 button.setText(Messages.getString("BrowsePanel.details"));
                 button.setActionCommand("details");
                 if (detailsButton != null)
                     button = detailsButton;
+                else deleteButton = button;
                 break;
         }
         return button;
@@ -103,9 +109,18 @@ public class BrowsePanel extends JPanel implements ActionListener {
         if (userTable == null) {
             userTable = new JTable();
             userTable.setName("userTable");
-            UserTableModel model = new UserTableModel(new ArrayList<>());
-            userTable.setModel(model);
         }
         return userTable;
+    }
+
+    public void initTable() {
+        UserTableModel model = null;
+        try {
+            model = new UserTableModel(new ArrayList<>(parent.getDao().findAll()));
+        } catch (SQLException e) {
+            model = new UserTableModel(new ArrayList<>());
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        userTable.setModel(model);
     }
 }
