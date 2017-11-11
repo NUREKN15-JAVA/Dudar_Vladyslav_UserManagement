@@ -9,8 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import static ua.nure.kn_15_6.dudar.Constants.formatter;
 
 public class EditPanel extends JPanel implements ActionListener {
     private User user;
@@ -24,8 +25,6 @@ public class EditPanel extends JPanel implements ActionListener {
     private JTextField firstNameField;
     private JTextField lastNameField;
     private JTextField dateOfBirthField;
-
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
 
     public EditPanel(MainFrame frame) {
         this.parent = frame;

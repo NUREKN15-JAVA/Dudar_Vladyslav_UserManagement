@@ -24,6 +24,12 @@ public class User {
         this.birthDate = date;
     }
 
+    public User(String firstName, String lastName, LocalDate birthDate) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+    }
+
     public Long getId() {
         return id;
     }
@@ -88,11 +94,13 @@ public class User {
 
     @Override
     public int hashCode() {
+        if (this.getId() == null)
+            return 0;
         int result = 17;
         result = 31 * result + id.hashCode();
-        result = 31 * result + firstName.hashCode();
-        result = 31 * result + lastName.hashCode();
-        result = 31 * result + birthDate.hashCode();
+//        result = 31 * result + firstName.hashCode();
+//        result = 31 * result + lastName.hashCode();
+//        result = 31 * result + birthDate.hashCode();
         return result;
     }
 

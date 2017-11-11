@@ -1,9 +1,13 @@
 package ua.nure.kn_15_6.dudar;
 
+import java.time.format.DateTimeFormatter;
+
 /**
  * Created by Vlad on 05.10.2017.
  */
 public class Constants {
+    public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+
     //Exception messages
     public static final String ERR_NO_NAME = "Name is not initialized.";
     public static final String ERR_NO_BIRTHDATE = "Birth date is not specified.";
