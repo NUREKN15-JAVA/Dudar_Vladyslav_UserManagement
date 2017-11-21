@@ -8,7 +8,7 @@ import ua.nure.kn_15_6.dudar.db.MockDaoFactory;
 import java.util.Properties;
 
 public abstract class MockServletTestCase extends BasicServletTestCaseAdapter {
-    private Mock mockUserDao;
+    protected Mock mockUserDao;
 
     public void setUp() throws Exception {
         super.setUp();
