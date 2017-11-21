@@ -18,13 +18,13 @@ public class BrowseServlet extends HttpServlet {
         browse(req, resp);
     }
 
-    private void browse(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
+    private void browse(HttpServletRequest req, HttpServletResponse resp) {
         try {
             Collection<User> users = DaoFactory.getInstance().getUserDao().findAll();
             req.getSession().setAttribute("users", users);
             req.getRequestDispatcher("/browse.jsp").forward(req, resp);
         } catch (Exception e) {
-            throw new ServletException(e);
+            throw new RuntimeException(e);
         }
     }
 }
