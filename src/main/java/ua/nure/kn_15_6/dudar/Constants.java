@@ -23,5 +23,23 @@ public class Constants {
     public static final String SQL_DELETE = "DELETE FROM users WHERE id=?";
     public static final String SQL_SELECT_BY_ID = "SELECT * FROM users WHERE id=?";
 
-    //Components names
+    //Buttons parameters
+    public static final String PARAM_ADD = "add";
+    public static final String PARAM_EDIT = "edit";
+    public static final String PARAM_DELETE = "delete";
+    public static final String PARAM_DETAILS = "details";
+    public static final String PARAM_OK = "ok";
+    public static final String PARAM_CANCEL = "cancel";
+    public static final String PARAM_BACK = "back";
+
+    //Textfield parameters
+    public static final String PARAM_ID = "id";
+    public static final String PARAM_FIRST_NAME = "firstName";
+    public static final String PARAM_LAST_NAME = "lastName";
+    public static final String PARAM_DATE = "date";
+
+    //Attributes keys
+    public static final String KEY_ERR = "error";
+    public static final String KEY_USER = "user";
+    public static final String KEY_USERS = "users";
 }

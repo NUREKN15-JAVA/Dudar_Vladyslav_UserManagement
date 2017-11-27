@@ -1,7 +1,7 @@
 package ua.nure.kn_15_6.dudar.view;
 
 import ua.nure.kn_15_6.dudar.User;
-import ua.nure.kn_15_6.dudar.util.Messages;
+import ua.nure.kn_15_6.dudar.util.Message;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,9 +40,9 @@ public class AddPanel extends JPanel implements ActionListener {
             fieldPanel = new JPanel();
             fieldPanel.setLayout(new GridLayout(3, 2));
 
-            addLabeledField(fieldPanel, Messages.getString("AddPanel.first_name"), getField("firstNameField"));
-            addLabeledField(fieldPanel, Messages.getString("AddPanel.last_name"), getField("lastNameField"));
-            addLabeledField(fieldPanel, Messages.getString("AddPanel.date_of_birth"), getField("dateOfBirthField"));
+            addLabeledField(fieldPanel, Message.getString("AddPanel.first_name"), getField("firstNameField"));
+            addLabeledField(fieldPanel, Message.getString("AddPanel.last_name"), getField("lastNameField"));
+            addLabeledField(fieldPanel, Message.getString("AddPanel.date_of_birth"), getField("dateOfBirthField"));
         }
         return fieldPanel;
     }
@@ -71,14 +71,14 @@ public class AddPanel extends JPanel implements ActionListener {
         button.addActionListener(this);
         switch (name) {
             case "okButton":
-                button.setText(Messages.getString("AddPanel.ok"));
+                button.setText(Message.getString("AddPanel.ok"));
                 button.setActionCommand("ok");
                 if (okButton != null)
                     button = okButton;
                 else okButton = button;
                 break;
             case "cancelButton":
-                button.setText(Messages.getString("AddPanel.cancel"));
+                button.setText(Message.getString("AddPanel.cancel"));
                 button.setActionCommand("cancel");
                 if (cancelButton != null)
                     button = cancelButton;
