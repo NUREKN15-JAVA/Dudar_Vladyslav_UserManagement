@@ -1,7 +1,7 @@
 package ua.nure.kn_15_6.dudar.view;
 
 import ua.nure.kn_15_6.dudar.User;
-import ua.nure.kn_15_6.dudar.util.Messages;
+import ua.nure.kn_15_6.dudar.util.Message;
 
 import javax.swing.*;
 import java.awt.*;
@@ -51,9 +51,9 @@ public class EditPanel extends JPanel implements ActionListener {
             fieldPanel = new JPanel();
             fieldPanel.setLayout(new GridLayout(3, 2));
 
-            addLabeledField(fieldPanel, Messages.getString("EditPanel.first_name"), getField("firstNameField"));
-            addLabeledField(fieldPanel, Messages.getString("EditPanel.last_name"), getField("lastNameField"));
-            addLabeledField(fieldPanel, Messages.getString("EditPanel.date_of_birth"), getField("dateOfBirthField"));
+            addLabeledField(fieldPanel, Message.getString("EditPanel.first_name"), getField("firstNameField"));
+            addLabeledField(fieldPanel, Message.getString("EditPanel.last_name"), getField("lastNameField"));
+            addLabeledField(fieldPanel, Message.getString("EditPanel.date_of_birth"), getField("dateOfBirthField"));
         }
         return fieldPanel;
     }
@@ -82,14 +82,14 @@ public class EditPanel extends JPanel implements ActionListener {
         button.addActionListener(this);
         switch (name) {
             case "okButton":
-                button.setText(Messages.getString("EditPanel.ok"));
+                button.setText(Message.getString("EditPanel.ok"));
                 button.setActionCommand("ok");
                 if (okButton != null)
                     button = okButton;
                 else okButton = button;
                 break;
             case "cancelButton":
-                button.setText(Messages.getString("EditPanel.cancel"));
+                button.setText(Message.getString("EditPanel.cancel"));
                 button.setActionCommand("cancel");
                 if (cancelButton != null)
                     button = cancelButton;

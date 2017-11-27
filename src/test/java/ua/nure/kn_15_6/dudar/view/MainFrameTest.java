@@ -8,10 +8,8 @@ import junit.extensions.jfcunit.eventdata.StringEventData;
 import junit.extensions.jfcunit.finder.NamedComponentFinder;
 import ua.nure.kn_15_6.dudar.User;
 import ua.nure.kn_15_6.dudar.db.DaoFactory;
-import ua.nure.kn_15_6.dudar.db.DaoFactoryImpl;
 import ua.nure.kn_15_6.dudar.db.MockDaoFactory;
-import ua.nure.kn_15_6.dudar.db.MockUserDao;
-import ua.nure.kn_15_6.dudar.util.Messages;
+import ua.nure.kn_15_6.dudar.util.Message;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import static ua.nure.kn_15_6.dudar.Constants.*;
 import static ua.nure.kn_15_6.dudar.Constants.formatter;
 
 public class MainFrameTest extends JFCTestCase {
@@ -81,9 +78,9 @@ public class MainFrameTest extends JFCTestCase {
 
         JTable table = (JTable) find(JTable.class, "userTable");
         assertEquals(3, table.getColumnCount());
-        assertEquals(Messages.getString("UserTableModel.id"),table.getColumnName(0));
-        assertEquals(Messages.getString("UserTableModel.first_name"),table.getColumnName(1));
-        assertEquals(Messages.getString("UserTableModel.last_name"),table.getColumnName(2));
+        assertEquals(Message.getString("UserTableModel.id"),table.getColumnName(0));
+        assertEquals(Message.getString("UserTableModel.first_name"),table.getColumnName(1));
+        assertEquals(Message.getString("UserTableModel.last_name"),table.getColumnName(2));
 
         find(JButton.class, "addButton");
         find(JButton.class, "editButton");

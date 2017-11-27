@@ -1,7 +1,7 @@
 package ua.nure.kn_15_6.dudar.view;
 
 import ua.nure.kn_15_6.dudar.User;
-import ua.nure.kn_15_6.dudar.util.Messages;
+import ua.nure.kn_15_6.dudar.util.Message;
 
 import javax.swing.*;
 import java.awt.*;
@@ -38,10 +38,10 @@ public class DetailsPanel extends JPanel implements ActionListener {
             fieldPanel = new JPanel();
             fieldPanel.setLayout(new GridLayout(4, 2));
 
-            addLablePair(fieldPanel, Messages.getString("DetailsPanel.id"), getLabel("idLabel"));
-            addLablePair(fieldPanel, Messages.getString("DetailsPanel.first_name"), getLabel("firstNameLabel"));
-            addLablePair(fieldPanel, Messages.getString("DetailsPanel.last_name"), getLabel("lastNameLabel"));
-            addLablePair(fieldPanel, Messages.getString("DetailsPanel.date_of_birth"), getLabel("dateOfBirthLabel"));
+            addLablePair(fieldPanel, Message.getString("DetailsPanel.id"), getLabel("idLabel"));
+            addLablePair(fieldPanel, Message.getString("DetailsPanel.first_name"), getLabel("firstNameLabel"));
+            addLablePair(fieldPanel, Message.getString("DetailsPanel.last_name"), getLabel("lastNameLabel"));
+            addLablePair(fieldPanel, Message.getString("DetailsPanel.date_of_birth"), getLabel("dateOfBirthLabel"));
         }
         return fieldPanel;
     }
@@ -69,7 +69,7 @@ public class DetailsPanel extends JPanel implements ActionListener {
         button.addActionListener(this);
         switch (name) {
             case "cancelButton":
-                button.setText(Messages.getString("DetailsPanel.cancel"));
+                button.setText(Message.getString("DetailsPanel.cancel"));
                 button.setActionCommand("cancel");
                 if (cancelButton != null)
                     button = cancelButton;

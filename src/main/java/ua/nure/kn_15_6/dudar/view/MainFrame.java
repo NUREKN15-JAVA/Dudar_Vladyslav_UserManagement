@@ -1,15 +1,13 @@
 package ua.nure.kn_15_6.dudar.view;
 
-import ua.nure.kn_15_6.dudar.Constants;
 import ua.nure.kn_15_6.dudar.User;
 import ua.nure.kn_15_6.dudar.db.DaoFactory;
 import ua.nure.kn_15_6.dudar.db.UserDao;
-import ua.nure.kn_15_6.dudar.util.Messages;
+import ua.nure.kn_15_6.dudar.util.Message;
 
 import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MainFrame extends JFrame {
@@ -37,7 +35,7 @@ public class MainFrame extends JFrame {
     private void initialize() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-        this.setTitle(Messages.getString("user_management"));
+        this.setTitle(Message.getString("user_management"));
         this.setContentPane(getContentPanel());
 
         contentPanel.add(getBrowsePanel(), BorderLayout.CENTER);
@@ -110,9 +108,9 @@ public class MainFrame extends JFrame {
         JFrame deleteFrame = new JFrame();
         deleteFrame.setName("deleteFrame");
         if (JOptionPane.showConfirmDialog(deleteFrame,
-                Messages.getString("BrowsePanel.delete_q") + " " +
+                Message.getString("BrowsePanel.delete_q") + " " +
                         selectedUser.getFirstName() + " " + selectedUser.getLastName() + "?",
-                Messages.getString("BrowsePanel.delete_title"),
+                Message.getString("BrowsePanel.delete_title"),
                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 
             try {

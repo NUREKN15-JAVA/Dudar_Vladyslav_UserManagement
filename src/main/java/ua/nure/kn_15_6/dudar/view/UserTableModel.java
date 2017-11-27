@@ -2,16 +2,16 @@ package ua.nure.kn_15_6.dudar.view;
 
 import ua.nure.kn_15_6.dudar.Constants;
 import ua.nure.kn_15_6.dudar.User;
-import ua.nure.kn_15_6.dudar.util.Messages;
+import ua.nure.kn_15_6.dudar.util.Message;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
 public class UserTableModel extends AbstractTableModel {
     private List<User> users = null;
-    private final String[] COLUMN_NAMES = {Messages.getString("UserTableModel.id"),
-            Messages.getString("UserTableModel.first_name"),
-            Messages.getString("UserTableModel.last_name")};
+    private final String[] COLUMN_NAMES = {Message.getString("UserTableModel.id"),
+            Message.getString("UserTableModel.first_name"),
+            Message.getString("UserTableModel.last_name")};
     private final Class[] COLUMN_CLASSES = {Long.class, String.class, String.class};
 
     public UserTableModel(List<User> users) {

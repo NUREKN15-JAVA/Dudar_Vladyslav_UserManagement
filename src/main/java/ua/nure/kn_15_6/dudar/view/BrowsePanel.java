@@ -1,7 +1,7 @@
 package ua.nure.kn_15_6.dudar.view;
 
 import ua.nure.kn_15_6.dudar.User;
-import ua.nure.kn_15_6.dudar.util.Messages;
+import ua.nure.kn_15_6.dudar.util.Message;
 
 import javax.swing.*;
 import java.awt.*;
@@ -44,28 +44,28 @@ public class BrowsePanel extends JPanel implements ActionListener {
         button.addActionListener(this);
         switch (name) {
             case "addButton":
-                button.setText(Messages.getString("BrowsePanel.add"));
+                button.setText(Message.getString("BrowsePanel.add"));
                 button.setActionCommand("add");
                 if (addButton != null)
                     button = addButton;
                 else addButton = button;
                 break;
             case "editButton":
-                button.setText(Messages.getString("BrowsePanel.edit"));
+                button.setText(Message.getString("BrowsePanel.edit"));
                 button.setActionCommand("edit");
                 if (editButton != null)
                     button = editButton;
                 else editButton = button;
                 break;
             case "deleteButton":
-                button.setText(Messages.getString("BrowsePanel.delete"));
+                button.setText(Message.getString("BrowsePanel.delete"));
                 button.setActionCommand("delete");
                 if (deleteButton != null)
                     button = deleteButton;
                 else deleteButton = button;
                 break;
             case "detailsButton":
-                button.setText(Messages.getString("BrowsePanel.details"));
+                button.setText(Message.getString("BrowsePanel.details"));
                 button.setActionCommand("details");
                 if (detailsButton != null)
                     button = detailsButton;
