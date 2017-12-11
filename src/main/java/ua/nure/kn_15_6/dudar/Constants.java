@@ -22,6 +22,7 @@ public class Constants {
     public static final String SQL_UPDATE = "UPDATE users SET firstname=?, lastname=?, dateofbirth=? WHERE id=?";
     public static final String SQL_DELETE = "DELETE FROM users WHERE id=?";
     public static final String SQL_SELECT_BY_ID = "SELECT * FROM users WHERE id=?";
+    public static final String SQL_SELECT_BY_FL_NAME = "SELECT * FROM users WHERE firstname=? AND lastname=?";
 
     //Buttons parameters
     public static final String PARAM_ADD = "add";

@@ -12,6 +12,9 @@ public interface UserDao {
     void delete(User user) throws SQLException;
     User find(Long id) throws SQLException;
     Collection<User> findAll() throws SQLException;
+    default Collection<User> find(String firstName, String lastName) throws SQLException {
+        throw new UnsupportedOperationException();
+    }
 
     ConnectionFactory getConnectionFactory();
     void setConnectionFactory(ConnectionFactory connectionFactory);

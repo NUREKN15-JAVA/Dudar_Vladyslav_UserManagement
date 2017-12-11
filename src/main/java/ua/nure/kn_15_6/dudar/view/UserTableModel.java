@@ -5,6 +5,7 @@ import ua.nure.kn_15_6.dudar.User;
 import ua.nure.kn_15_6.dudar.util.Message;
 
 import javax.swing.table.AbstractTableModel;
+import java.util.Collection;
 import java.util.List;
 
 public class UserTableModel extends AbstractTableModel {
@@ -54,5 +55,13 @@ public class UserTableModel extends AbstractTableModel {
         if (users.isEmpty())
             throw new RuntimeException(Constants.ERR_NO_USER);
         return users.get(rowIndex);
+    }
+
+    public void addUsers(Collection<User> users) {
+        this.users.addAll(users);
+    }
+
+    public void clearUsers() {
+        this.users.clear();
     }
 }

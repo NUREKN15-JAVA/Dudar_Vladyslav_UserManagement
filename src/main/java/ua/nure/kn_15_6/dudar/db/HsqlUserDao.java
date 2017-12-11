@@ -6,6 +6,7 @@ import ua.nure.kn_15_6.dudar.User;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -108,6 +109,27 @@ class HsqlUserDao implements UserDao {
             }
         }
         return allUsers;
+    }
+
+    @Override
+    public Collection<User> find(String firstName, String lastName) throws SQLException {
+        try (Connection connection = connectionFactory.createConnection();
+             PreparedStatement ps = connection.prepareStatement(Constants.SQL_SELECT_BY_FL_NAME)) {
+            int i = 1;
+            ps.setString(i++, firstName);
+            ps.setString(i, lastName);
+            ResultSet rs = ps.executeQuery();
+            Collection<User> users = new ArrayList<>();
+            while (rs.next()) {
+                User user = new User();
+                user.setId(rs.getLong(1));
+                user.setFirstName(rs.getString(2));
+                user.setLastName(rs.getString(3));
+                user.setBirthDate(rs.getDate(4).toLocalDate());
+                users.add(user);
+            }
+            return users;
+        }
     }
 
     public ConnectionFactory getConnectionFactory() {
